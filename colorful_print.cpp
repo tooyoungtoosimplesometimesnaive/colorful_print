@@ -1,4 +1,7 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
+#include <random>
 #include <string>
 
 using std::string;
@@ -54,6 +57,16 @@ int main() {
 
 //	cout << d.decorate("Test", d.UNDERLINED, d.Red, "") << endl;
 	d.draw_cloth(40, 20, d.Red_bg);
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(1,500);
+
+	for (int n = 0; n < 100000; ++n) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(n));
+		cout << d.decorate("=", d.Red, d.Default_bg) << std::flush;
+
+	}
 	return 0;
 }
 
